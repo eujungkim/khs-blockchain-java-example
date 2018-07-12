@@ -52,11 +52,24 @@ public class SimpleBlockchain<T extends Tx> {
 	}
 
 	public boolean validate() {
-
+		/*
 		String previousHash = chain.get(0).getHash();
 		for (Block<T> block : chain) {
 			String currentHash = block.getHash();
 			if (!currentHash.equals(previousHash)) {
+				return false;
+			}
+
+			previousHash = currentHash;
+
+		}
+
+		return true;
+		*/
+		String previousHash = chain.get(0).getPreviousHash();
+		for (Block<T> block : chain) {
+			String currentHash = block.getHash();
+			if (!block.getPreviousHash().equals(previousHash)) {
 				return false;
 			}
 
